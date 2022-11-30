@@ -217,6 +217,7 @@ def parse_args(input_args=None):
         ),
     )
     parser.add_argument("--local_rank", type=int, default=-1, help="For distributed training: local_rank")
+    parser.add_argument("--logger", type=str, default="tensorboard", help="Use tensorboard or other logger")
 
     if input_args is not None:
         args = parser.parse_args(input_args)
@@ -353,7 +354,7 @@ def main(args):
     accelerator = Accelerator(
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         mixed_precision=args.mixed_precision,
-        log_with="tensorboard",
+        log_with=args.logger,
         logging_dir=logging_dir,
     )
 
