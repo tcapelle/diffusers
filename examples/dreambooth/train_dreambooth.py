@@ -223,7 +223,17 @@ def parse_args(input_args=None):
         ),
     )
     parser.add_argument("--local_rank", type=int, default=-1, help="For distributed training: local_rank")
-    parser.add_argument("--logger", type=str, default="tensorboard", help="Use tensorboard or other logger")
+    parser.add_argument(
+        "--logger", 
+        type=str, 
+        default="tensorboard", 
+        choices=["tensorboard", "wandb"],
+        nargs="+",
+        help=(
+            "Whether to use [tensorboard](https://www.tensorflow.org/tensorboard) or [wandb](https://www.wandb.ai)"
+            " for experiment tracking and logging of model metrics and model checkpoints"
+        ),
+    )
 
     if input_args is not None:
         args = parser.parse_args(input_args)
